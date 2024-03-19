@@ -15,6 +15,15 @@ class CustomUser(AbstractUser):
     )
     username = models.CharField(_('username'), unique=True, max_length=50, blank=False, null=False)
     email = models.EmailField(_('email address'), unique=True)
+    REGISTERATION_CHOICE = [
+        ('email', 'Email'), 
+        ('google', 'Google')
+    ]
+    registration_method = models.CharField(
+        max_length=10,
+        choices = REGISTERATION_CHOICE,
+        default = 'email'
+    )
     is_admin = models.BooleanField(default=False)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
@@ -25,4 +34,4 @@ class CustomUser(AbstractUser):
     REQUIRED_FIELDS = ('username',)
 
     def __str__(self):
-        return self.email
+        return self.username
