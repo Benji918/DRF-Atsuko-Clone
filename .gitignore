@@ -57,6 +57,10 @@ cover/
 
 # Django stuff:
 atsuko_clone/__pycache__
+users/__pycache__
+core/__pycache__
+core/migrations
+
 .env
 
 *.log
