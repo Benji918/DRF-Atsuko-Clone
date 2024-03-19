@@ -30,13 +30,8 @@ urlpatterns = [
     path('api/schema/swagger/', SpectacularSwaggerView.as_view(), name='swagger-ui'),
     path('api/schema/redoc/', SpectacularRedocView.as_view(url_name='schema'), name='redoc'),
 
-    # API ENDPOINTS
-    path('api/user/', include('user.urls')),
-     path('api/schema/swagger/', SpectacularSwaggerView.as_view(), name='swagger-ui'),
-    path('api/schema/redoc/', SpectacularRedocView.as_view(url_name='schema'), name='redoc'),
 
     # API ENDPOINTS
-    path('api/user/', include('user.urls')),
     path('auth/', include('djoser.urls')),
     path('auth/', include('djoser.urls.jwt')),
 
