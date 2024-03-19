@@ -59,7 +59,7 @@ cover/
 atsuko_clone/__pycache__
 users/__pycache__
 core/__pycache__
-core/migrations
+core/migrations/__pycache__
 
 .env
 
