@@ -35,6 +35,9 @@ urlpatterns = [
     path('auth/', include('djoser.urls')),
     path('auth/', include('djoser.urls.jwt')),
 
+    # APPLICATION ENDPOINTS
+    path('google-login/', include('google_login.urls'))
+
 ]
 
 if settings.DEBUG:
