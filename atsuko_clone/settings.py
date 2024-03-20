@@ -48,6 +48,7 @@ INSTALLED_APPS = [
     # local apps
     'core',
     'users',
+    'google_login',
 ]
 
 MIDDLEWARE = [
