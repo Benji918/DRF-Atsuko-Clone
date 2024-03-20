@@ -61,7 +61,7 @@ users/__pycache__
 core/__pycache__
 core/migrations/__pycache__
 
-
+google_login/__pycache__
 
 *.log
 local_settings.py
