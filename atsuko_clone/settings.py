@@ -13,6 +13,7 @@ https://docs.djangoproject.com/en/5.0/ref/settings/
 from datetime import timedelta
 import os
 from pathlib import Path
+from decouple import config
 from dotenv import load_dotenv
 
 # Load environment variables from .env file
@@ -49,6 +50,8 @@ INSTALLED_APPS = [
     'djoser',
     'drf_spectacular',
     'django_filters',
+    'django_celery_beat',
+    'django_celery_results',
     
 
     # local apps
@@ -186,3 +189,10 @@ BASE_BACKEND_URL= "http://localhost:8000"
 GOOGLE_OAUTH2_CLIENT_ID = os.getenv('GOOGLE_OAUTH2_CLIENT_ID')
 GOOGLE_OAUTH2_CLIENT_SECRET = os.environ.get('GOOGLE_OAUTH2_CLIENT_SECRET') 
 GOOGLE_OAUTH2_PROJECT_ID = os.environ.get('GOOGLE_OAUTH2_PROJECT_ID')
+
+# Celery settings
+CELERY_BROKER_REDIS_URL="redis://localhost:6379"
+CELERY_ACCEPT_CONTENT=['application/json']
+CELERY_RESULT_SERIALIZER='json'
+CELERY_TASK_SERIALIZER='json'
+CELERY_TIMEZONE='Nigeria/Enugu'
