@@ -5,6 +5,9 @@ from .apis import (
     GoogleLoginRedirectApi,
 )
 
+
+app_name = 'google-login'
+
 urlpatterns = [
     path("callback/", GoogleLoginApi.as_view(), name="callback-raw"),
     path("redirect/", GoogleLoginRedirectApi.as_view(), name="redirect-raw"),

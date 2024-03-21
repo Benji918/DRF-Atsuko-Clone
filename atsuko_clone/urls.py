@@ -36,7 +36,8 @@ urlpatterns = [
     path('auth/', include('djoser.urls.jwt')),
 
     # APPLICATION ENDPOINTS
-    path('google-login/', include('google_login.urls'))
+    path('api/', include('google_login.urls'))
+
 
 ]
 

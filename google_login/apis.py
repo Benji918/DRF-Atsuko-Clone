@@ -20,6 +20,7 @@ class GoogleLoginRedirectApi(PublicApi):
         google_login_flow = GoogleRawLoginFlowService()
 
         authorization_url, state = google_login_flow.get_authorization_url()
+        print(authorization_url, state)
 
         request.session["google_oauth2_state"] = state
 
