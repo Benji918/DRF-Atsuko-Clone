@@ -7,4 +7,5 @@ from .tasks import send_registration_email
 def send_email_registration_on_register(sender, instance, created, **kwargs):
     if created:
         email = instance.email
+        print(email)
         send_registration_email.delay(receiver_email=email)
