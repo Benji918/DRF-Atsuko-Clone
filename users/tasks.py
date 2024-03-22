@@ -7,14 +7,7 @@ from django.conf import settings
 
 @shared_task
 def send_registration_email( receiver_email, message='Thank you for registering on our site.'):
-    # subject = 'welcome to GFG world'
-    # message = message
-    # email_from = settings.EMAIL_HOST_USER
-    # recipient_list = [receiver_email, ]
-    # send_mail( subject, message, email_from, recipient_list )  
-
-    
-        # Create a MIME object
+    # Create a MIME object
     msg = MIMEMultipart()
         
     # Attach the message
