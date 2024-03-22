@@ -47,6 +47,7 @@ INSTALLED_APPS = [
 
      # third party apps
     'rest_framework',
+    'rest_framework_simplejwt',
     'djoser',
     'drf_spectacular',
     'django_filters',
@@ -152,7 +153,7 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 DJOSER = {
     'SERIALIZERS': {
         'user_create': 'users.serializers.UserCreateSerializer',
-        'current_user': 'users.serializers.CurrentUserSerializer'
+        'current_user': 'users.serializers.CurrentUserSerializer',
     }
 }
 
@@ -184,6 +185,9 @@ SPECTACULAR_SETTINGS = {
 }
 
 BASE_BACKEND_URL= "http://localhost:8000"
+# EMAIL SETTINGS
+SENDER_EMAIL = os.getenv('SENDER_EMAIL')
+SENDER_EMAIL_PASSWORD = os.getenv('SENDER_EMAIL_PASSWORD')
 
 # GOOGLE AUTH SETTINGS
 GOOGLE_OAUTH2_CLIENT_ID = os.getenv('GOOGLE_OAUTH2_CLIENT_ID')
@@ -200,3 +204,4 @@ CELERY_RESULT_BACKEND = 'django-db'
 
 # Celery beat settings
 CELERY_BEAT_SCHEDULER='django_celery_beat.schedulers:Database'
+
