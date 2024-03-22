@@ -11,8 +11,13 @@ app = Celery('atsuko_clone')  # Replace 'your_project' with your project's name.
 # Configure Celery using settings from Django settings.py.
 app.config_from_object('django.conf:settings', namespace='CELERY')
 
+# Celery beat settings
+app.conf.beat_schedule = {}
+
 # Load tasks from all registered Django app configs.
 app.autodiscover_tasks(lambda: settings.INSTALLED_APPS)
+
+
 
 @app.task(bind=True, ignore_result=True)
 def debug_task(self):

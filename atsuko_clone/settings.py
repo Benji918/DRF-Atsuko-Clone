@@ -191,8 +191,12 @@ GOOGLE_OAUTH2_CLIENT_SECRET = os.environ.get('GOOGLE_OAUTH2_CLIENT_SECRET')
 GOOGLE_OAUTH2_PROJECT_ID = os.environ.get('GOOGLE_OAUTH2_PROJECT_ID')
 
 # Celery settings
-CELERY_BROKER_REDIS_URL="redis://localhost:6379"
+CELERY_BROKER_URL = 'redis://127.0.0.1:6379/0'
 CELERY_ACCEPT_CONTENT=['application/json']
 CELERY_RESULT_SERIALIZER='json'
 CELERY_TASK_SERIALIZER='json'
-CELERY_TIMEZONE='Nigeria/Enugu'
+CELERY_TIMEZONE='Africa/Lagos'
+CELERY_RESULT_BACKEND = 'django-db'
+
+# Celery beat settings
+CELERY_BEAT_SCHEDULER='django_celery_beat.schedulers:Database'
