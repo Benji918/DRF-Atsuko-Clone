@@ -5,8 +5,8 @@ import smtplib, ssl
 from celery import shared_task
 from django.conf import settings
 
-@shared_task
-def send_registration_email( receiver_email, message='Thank you for registering on our site.'):
+@shared_task(bind=True)
+def send_registration_email(self, receiver_email, message='Thank you for registering on our site.'):
     # Create a MIME object
     msg = MIMEMultipart()
         
@@ -26,3 +26,4 @@ def send_registration_email( receiver_email, message='Thank you for registering 
         
         # Send the email
         server.sendmail(settings.EMAIL_HOST_USER, receiver_email, msg.as_string())
+    return 'Email Sent Successfully!!!'

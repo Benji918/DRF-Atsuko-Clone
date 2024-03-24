@@ -185,14 +185,8 @@ SPECTACULAR_SETTINGS = {
 }
 
 BASE_BACKEND_URL= "http://localhost:8000"
-# EMAIL SETTINGS
-SENDER_EMAIL = os.getenv('SENDER_EMAIL')
-SENDER_EMAIL_PASSWORD = os.getenv('SENDER_EMAIL_PASSWORD')
 
-EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
-EMAIL_HOST = 'smtp.gmail.com'
-EMAIL_USE_TLS = True
-EMAIL_PORT = 465
+# EMAIL SETTINGS
 EMAIL_HOST_USER = os.getenv('SENDER_EMAIL')
 EMAIL_HOST_PASSWORD = os.getenv('SENDER_EMAIL_PASSWORD')
 
@@ -210,5 +204,5 @@ CELERY_TIMEZONE='Africa/Lagos'
 CELERY_RESULT_BACKEND = 'django-db'
 
 # Celery beat settings
-CELERY_BEAT_SCHEDULER='django_celery_beat.schedulers:Database'
+CELERY_BEAT_SCHEDULER = 'django_celery_beat.schedulers:DatabaseScheduler'
 
