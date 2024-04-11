@@ -1,0 +1,46 @@
+services:
+  web:
+    image: custom-django
+    build: .
+    ports:
+      - 8000:8000
+    volumes:
+      - ./:/app
+      - dev-static-data:/vol/web
+    command: >
+      sh -c "python manage.py migrate &&
+             python manage.py runserver 0.0.0.0:8000
+             celery -A atsuko_clone worker -l info"
+    depends_on:
+      - postgres-db
+      - celery
+
+  redis:
+    image: redis:latest
+    ports:
+      - 6379:6379
+       
+    
+  celery:
+    image: celery:latest
+    volumes:
+      - ./:/app
+    environment:
+      - CELERY_BROKER_URL=redis://127.0.0.1:6379/0 
+    command: >
+      sh -c "celery -A atsuko_clone worker -l info"
+    depends_on:
+      - redis
+  
+  postgres-db:
+    image: postgres:14
+    environment:
+      - POSTGRES_PASSWORD=benjamin is cool
+      - POSTGRES_USERNAME=benji
+    volumes:
+      - postgres_db_data:/var/lib/postgresql/data
+  
+  
+volumes:
+  postgres_db_data:
+  dev-static-data:
