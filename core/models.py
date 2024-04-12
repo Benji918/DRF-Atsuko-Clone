@@ -11,7 +11,7 @@ def profile_image_file(instance, filename):
     ext = os.path.splitext(filename)[1]
     filename = f'{uuid.uuid4()}{ext}'
     return os.path.join('uploads', 'profile', filename)
-
+# l
 
 # Create your models here.
 class CustomUser(AbstractUser):
