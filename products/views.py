@@ -1,5 +1,4 @@
 from rest_framework import viewsets, mixins, status
-from rest_framework.viewsets import GenericViewSet
 from rest_framework_simplejwt.authentication import JWTAuthentication
 from rest_framework.decorators import action
 from rest_framework.response import Response
@@ -7,7 +6,7 @@ from rest_framework.permissions import IsAuthenticated
 from .serializers import ProductSerializer, ProductImageSerializer
 from core.models import Product
 from .permissions import IsOwnerOfProduct
-
+from django.urls import reverse
 
 # Create your views here.
 class ProductViewSets(viewsets.ModelViewSet):
@@ -42,6 +41,13 @@ class ProductViewSets(viewsets.ModelViewSet):
                 return Response(status=status.HTTP_204_NO_CONTENT)
         return Response(serializer.data, status=status.HTTP_400_BAD_REQUEST)
 
+    @action(detail=True, url_name='sharable-link', url_path='sharable-link')
+    def get_sharable_link(self, request, pk=None):
+        """Get the sharable link for a product"""
+        product = self.get_object()
+        sharable_link = request.build_absolute_uri(reverse('product-detail', args=[product.id]))
+        return Response({'sharable_link': sharable_link})
+
     def perform_create(self, serializer):
-        """Create a new profiles for a specific authenticated user"""
+        """Create a new products for a specific authenticated user"""
         serializer.save(user=self.request.user)
