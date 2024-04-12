@@ -93,6 +93,9 @@ class Product(models.Model):
     def __str__(self):
         return self.name
 
+    def generate_sharable_link(self):
+        return f'/products/{self.id}/'
+
 
 class Cart(models.Model):
     id = models.UUIDField(
