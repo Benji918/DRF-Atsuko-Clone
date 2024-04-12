@@ -8,6 +8,7 @@ from core.models import MerchantProfile
 from .serializers import ProfileSerializer, ProfileImageSerializer
 from .permissions import IsOwnerOrMerchant
 
+
 # Create your views here.
 class ProfileViewSets(mixins.RetrieveModelMixin, mixins.UpdateModelMixin, mixins.ListModelMixin, GenericViewSet):
     queryset = MerchantProfile.objects.all()
@@ -23,7 +24,6 @@ class ProfileViewSets(mixins.RetrieveModelMixin, mixins.UpdateModelMixin, mixins
         if self.action == 'upload_image':
             return ProfileImageSerializer
         return self.serializer_class
-    
 
     @action(methods=['POST', 'PUT', 'DELETE'], detail=True, url_path='upload-image')
     def upload_image(self, request, pk=None):
