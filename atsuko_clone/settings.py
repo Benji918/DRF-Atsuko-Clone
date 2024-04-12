@@ -60,7 +60,8 @@ INSTALLED_APPS = [
     'users',
     'google_login',
     'merchants',
-    'profile'
+    'profile',
+    'products',
 ]
 
 MIDDLEWARE = [

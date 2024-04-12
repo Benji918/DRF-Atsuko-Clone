@@ -6,11 +6,14 @@ import uuid
 import os
 from django.conf import settings
 
+
 def profile_image_file(instance, filename):
     """Generate filename for new object image"""
     ext = os.path.splitext(filename)[1]
     filename = f'{uuid.uuid4()}{ext}'
     return os.path.join('uploads', 'profile', filename)
+
+
 # l
 
 # Create your models here.
@@ -26,13 +29,13 @@ class CustomUser(AbstractUser):
     username = models.CharField(_('username'), unique=True, max_length=50, blank=False, null=False)
     email = models.EmailField(_('email address'), unique=True)
     REGISTERATION_CHOICE = [
-        ('email', 'Email'), 
+        ('email', 'Email'),
         ('google', 'Google')
     ]
     registration_method = models.CharField(
         max_length=10,
-        choices = REGISTERATION_CHOICE,
-        default = 'email'
+        choices=REGISTERATION_CHOICE,
+        default='email'
     )
     is_admin = models.BooleanField(default=False)
     is_merchant = models.BooleanField(default=False)
@@ -46,7 +49,8 @@ class CustomUser(AbstractUser):
 
     def __str__(self):
         return self.username
-    
+
+
 class MerchantProfile(models.Model):
     id = models.UUIDField(
         primary_key=True,
@@ -63,9 +67,6 @@ class MerchantProfile(models.Model):
 
     def __str__(self):
         return f'Profile for {self.user.username}'
-    
-   
-
 
 
 class Product(models.Model):
