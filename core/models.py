@@ -14,7 +14,12 @@ def profile_image_file(instance, filename):
     return os.path.join('uploads', 'profile', filename)
 
 
-# l
+def product_image_file(instance, filename):
+    """Generate filename for new object image"""
+    ext = os.path.splitext(filename)[1]
+    filename = f'{uuid.uuid4()}{ext}'
+    return os.path.join('uploads', 'product', filename)
+
 
 # Create your models here.
 class CustomUser(AbstractUser):
@@ -79,6 +84,7 @@ class Product(models.Model):
     product_name = models.CharField(max_length=255)
     description = models.TextField()
     price = models.DecimalField(max_digits=10, decimal_places=2)
+    product_image = models.ImageField(upload_to=product_image_file, null=True, blank=True)
     stock = models.PositiveIntegerField(default=0)
     merchant = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
     created_at = models.DateTimeField(auto_now_add=True)
