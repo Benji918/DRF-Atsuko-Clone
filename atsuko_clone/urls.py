@@ -38,7 +38,7 @@ urlpatterns = [
     # APPLICATION ENDPOINTS
     path('api/', include('google_login.urls')),
     path('merchant_profile/', include('profiles.urls')),
-    # path('merchant', include('merchants.urls')),
+    path('products/', include('products.urls')),
     
 
 ]
