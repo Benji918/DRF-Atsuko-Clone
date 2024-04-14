@@ -203,15 +203,13 @@ class Product(models.Model):
 class Wishlist(models.Model):
     user = models.OneToOneField(CustomUser, on_delete=models.CASCADE)
     products = models.ManyToManyField(Product)
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
 
     def __str__(self):
         return f"Wishlist for {self.user.username}"
 
-    def add_to_wishlist(self, product):
-        self.products.add(product)
 
-    def remove_from_wishlist(self, product):
-        self.products.remove(product)
 
 
 class Cart(models.Model):
