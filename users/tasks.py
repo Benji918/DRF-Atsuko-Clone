@@ -5,17 +5,20 @@ import smtplib, ssl
 from celery import shared_task
 from django.conf import settings
 
-@shared_task(bind=True)
-def send_registration_email(self, receiver_email, message='Thank you for registering on our site.'):
+
+@shared_task
+def send_registration_email(receiver_email, message='Thank you for registering on our site.'):
     # Create a MIME object
     msg = MIMEMultipart()
-        
+
     # Attach the message
     msg.attach(MIMEText(message, "plain"))
 
     # Set the email subject, sender, and receiver
     msg["Subject"] = 'welcome to GFG world'
     msg["From"] = settings.EMAIL_HOST_USER
+    print(settings.EMAIL_HOST_USER)
+    print(settings.EMAIL_HOST_PASSWORD)
     msg["To"] = receiver_email
 
     # Establish a connection to the SMTP server
@@ -23,7 +26,7 @@ def send_registration_email(self, receiver_email, message='Thank you for registe
     with smtplib.SMTP_SSL("smtp.gmail.com", 465, context=context) as server:
         # Log in to the email account
         server.login(settings.EMAIL_HOST_USER, settings.EMAIL_HOST_PASSWORD)
-        
+
         # Send the email
         server.sendmail(settings.EMAIL_HOST_USER, receiver_email, msg.as_string())
     return 'Email Sent Successfully!!!'
