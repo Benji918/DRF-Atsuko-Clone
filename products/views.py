@@ -22,7 +22,7 @@ class ProductViewSets(viewsets.ModelViewSet):
 
     def get_queryset(self):
         """Return only lodge objects for the request user"""
-        return self.queryset.filter(user=self.request.user).order_by('-id')
+        return self.queryset.filter(merchant=self.request.user).order_by('-id')
 
     def get_serializer_class(self):
         if self.action == 'upload_image':
