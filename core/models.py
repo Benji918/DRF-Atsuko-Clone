@@ -210,8 +210,6 @@ class Wishlist(models.Model):
         return f"Wishlist for {self.user.username}"
 
 
-
-
 class Cart(models.Model):
     id = models.UUIDField(
         primary_key=True,
