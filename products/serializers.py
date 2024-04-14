@@ -1,4 +1,4 @@
-from core.models import Product
+from core.models import Product, Wishlist
 from rest_framework import serializers
 
 
@@ -14,3 +14,9 @@ class ProductImageSerializer(serializers.ModelSerializer):
         model = Product
         fields = ['id', 'product_image']
         read_only_fields = ['id']
+
+
+class WishlistSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Wishlist
+        fields = '__all__'

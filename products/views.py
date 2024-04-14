@@ -3,10 +3,13 @@ from rest_framework_simplejwt.authentication import JWTAuthentication
 from rest_framework.decorators import action
 from rest_framework.response import Response
 from rest_framework.permissions import IsAuthenticated
-from .serializers import ProductSerializer, ProductImageSerializer
-from core.models import Product
+from .serializers import ProductSerializer, ProductImageSerializer, WishlistSerializer
+from core.models import Product, Wishlist
 from .permissions import IsOwnerOfProduct
 from django.urls import reverse
+from django_filters.rest_framework import DjangoFilterBackend
+from .filters import ProductFilter
+
 
 # Create your views here.
 class ProductViewSets(viewsets.ModelViewSet):
@@ -14,6 +17,8 @@ class ProductViewSets(viewsets.ModelViewSet):
     serializer_class = ProductSerializer
     authentication_classes = [JWTAuthentication]
     permission_classes = [IsAuthenticated, IsOwnerOfProduct]
+    filter_backends = [DjangoFilterBackend]
+    filterset_class = ProductFilter
 
     def get_queryset(self):
         """Return only lodge objects for the request user"""
@@ -50,4 +55,17 @@ class ProductViewSets(viewsets.ModelViewSet):
 
     def perform_create(self, serializer):
         """Create a new products for a specific authenticated user"""
+        serializer.save(user=self.request.user)
+
+
+class WishlistViewSet(mixins.CreateModelMixin, mixins.RetrieveModelMixin, mixins.UpdateModelMixin, mixins.DestroyModelMixin, mixins.ListModelMixin):
+    queryset = Wishlist.objects.all()
+    serializer_class = WishlistSerializer
+    authentication_classes = [JWTAuthentication]
+    permission_classes = [IsAuthenticated]
+
+    def get_queryset(self):
+        return Wishlist.objects.filter(user=self.request.user)
+
+    def perform_create(self, serializer):
         serializer.save(user=self.request.user)
