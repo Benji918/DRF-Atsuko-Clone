@@ -58,7 +58,7 @@ class ProductViewSets(viewsets.ModelViewSet):
         serializer.save(user=self.request.user)
 
 
-class WishlistViewSet(mixins.CreateModelMixin, mixins.RetrieveModelMixin, mixins.UpdateModelMixin, mixins.DestroyModelMixin, mixins.ListModelMixin):
+class WishlistViewSet(viewsets.ModelViewSet):
     queryset = Wishlist.objects.all()
     serializer_class = WishlistSerializer
     authentication_classes = [JWTAuthentication]
