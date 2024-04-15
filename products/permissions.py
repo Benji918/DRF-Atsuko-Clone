@@ -8,4 +8,4 @@ class IsOwnerOfProduct(permissions.BasePermission):
 
     def has_object_permission(self, request, view, obj):
         # Allow editing if the user is the owner of the object or a merchant
-        return obj.user == request.user or request.user.is_merchant
+        return obj.merchant == request.user or request.user.is_merchant

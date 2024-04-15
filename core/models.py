@@ -183,18 +183,18 @@ class Product(models.Model):
         editable=False,
         unique=True
     )
-    product_name = models.CharField(max_length=255)
-    description = models.TextField()
+    product_name = models.CharField(max_length=50, null=False, blank=False, unique=True)
+    description = models.TextField(max_length=255, null=False, blank=False)
     category = models.CharField(max_length=50, choices=PRODUCT_CATEGORIES)
-    price = models.DecimalField(max_digits=10, decimal_places=2)
+    price = models.DecimalField(max_digits=10, decimal_places=2, null=False, blank=False)
     product_image = models.ImageField(upload_to=product_image_file, null=True, blank=True)
-    stock = models.PositiveIntegerField(default=0)
+    stock = models.PositiveIntegerField(default=0, null=False, blank=False)
     merchant = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
     def __str__(self):
-        return self.name
+        return f'Product name -> {self.product_name}'
 
     def generate_sharable_link(self):
         return f'/products/{self.id}/'
