@@ -1,5 +1,5 @@
 from django.contrib import admin
-from core.models import CustomUser, Payment, Product, Cart, CartItem, ProductReview, Checkout, MerchantProfile  
+from core.models import CustomUser, Payment, Product, Cart, CartItem, ProductReview, Checkout, MerchantProfile, Notification
 
 
 # Register your models here.
@@ -11,6 +11,7 @@ admin.site.register(Product)
 admin.site.register(ProductReview)
 admin.site.register(MerchantProfile)
 admin.site.register(Checkout)
+admin.site.register(Notification)
 
 
 
