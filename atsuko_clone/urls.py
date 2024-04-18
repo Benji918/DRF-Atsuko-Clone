@@ -39,7 +39,8 @@ urlpatterns = [
     path('api/', include('google_login.urls')),
     path('merchant_profile/', include('profiles.urls')),
     path('products/', include('products.urls')),
-    
+    path('notifications/', include('notifications.urls')),
+
 
 ]
 
