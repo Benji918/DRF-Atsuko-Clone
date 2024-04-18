@@ -290,6 +290,12 @@ class Checkout(models.Model):
 
 
 class Notification(models.Model):
+    id = models.UUIDField(
+        primary_key=True,
+        default=uuid.uuid4,
+        editable=False,
+        unique=True
+    )
     recipient = models.ForeignKey(CustomUser, on_delete=models.CASCADE)
     message = models.CharField(max_length=255)
     timestamp = models.DateTimeField(auto_now_add=True)
