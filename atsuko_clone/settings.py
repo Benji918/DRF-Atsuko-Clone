@@ -58,6 +58,7 @@ INSTALLED_APPS = [
     'google_login',
     'profile',
     'products',
+    'notifications'
 ]
 
 MIDDLEWARE = [
