@@ -51,6 +51,7 @@ INSTALLED_APPS = [
     'django_filters',
     'django_celery_beat',
     'django_celery_results',
+    'django_sonar',
 
     # local apps
     'core',
@@ -69,6 +70,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'django_sonar.middlewares.requests.RequestsMiddleware',
 ]
 
 ROOT_URLCONF = 'atsuko_clone.urls'
@@ -142,6 +144,16 @@ MEDIA_ROOT = BASE_DIR / 'media'
 # https://docs.djangoproject.com/en/5.0/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+DJANGO_SONAR = {
+    'excludes': [
+        STATIC_URL,
+        MEDIA_URL,
+        '/sonar/',
+        '/admin/',
+        '/__reload__/',
+    ],
+}
 
 # DJOSER SETTINGS
 DJOSER = {
